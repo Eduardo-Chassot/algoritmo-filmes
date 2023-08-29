@@ -3,7 +3,7 @@
 include("../config.php");
 
 $pesquisa = $_POST['pesquisa']; // Por enquanto não recebe nada //
-$coluna = $_POST['coluna'];
+$coluna = $_POST['select'];
 
 $dicionarioColunas = [
     'id'             => 'id',
@@ -37,15 +37,12 @@ array_walk_recursive($array, function (&$item) {
     $item = mb_convert_encoding($item, 'UTF-8');
 });
 
-$array = sortearPorColuna($array);
-$positions = buscaBinaria($array, "assassin", 'title');
+$array = sortearPorColuna($array, $dicionarioColunas[$coluna]);
+$positions = buscaBinaria($array, $pesquisa, $dicionarioColunas[$coluna]);
 
 foreach($positions as $position){
     $resultados[] = $array[$position];
 }
 
-echo "<pre>";
-print_r($resultados);
-echo "<pre>";
-
+echo json_encode($resultados);
 ?>

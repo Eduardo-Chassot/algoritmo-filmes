@@ -50,8 +50,6 @@ function buscaBinaria($array, $alvo, $coluna = 'title') {
 function comecaCom($string, $prefixo) {
     $stringMinuscula = strtolower($string);
     $prefixoMinusculo = strtolower($prefixo);
-
-    echo "String Minuscula: ".$stringMinuscula." Prefixo Minusculo: ".$prefixoMinusculo."<br>";
     
     return strpos($stringMinuscula, $prefixoMinusculo) === 0;
 }

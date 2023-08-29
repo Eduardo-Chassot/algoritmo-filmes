@@ -1,18 +1,51 @@
 <?php
 
-$pesquisa = $_POST['pesquisa'];
+include("../config.php");
+
+$pesquisa = $_POST['pesquisa']; // Por enquanto não recebe nada //
+$coluna = $_POST['coluna'];
+
+$dicionarioColunas = [
+    'id'             => 'id',
+    'titulo'         => 'title',
+    'lancamento'     => 'release_date',
+    'lingua'         => 'original_language',
+    'votos_medios'   => 'vote_average',
+    "votos_contagem" => 'vote_count',
+    "popularidade"   => 'popularity',
+    'resumo'         => 'overview',
+    'orcamento'      => 'budget',
+    'lucro'          => 'revenue',
+    'tempo'          => 'runtime',
+    'subtitulo'      => 'tagline'
+];
+
+$resultados = array();
 
 $handle = fopen("filmes.csv", "r");
 
 $header = fgetcsv($handle, 10000, ";");
 
 while ($row = fgetcsv($handle, 10000, ";")) {
-    $nota[] = array_combine($header, $row);
+    $array[] = array_combine($header, $row);
 }
 
 fclose($handle);
 
-echo json_encode($nota[1]);
+// deixa tudo em utf8 //
+array_walk_recursive($array, function (&$item) {
+    $item = mb_convert_encoding($item, 'UTF-8');
+});
 
+$array = sortearPorColuna($array);
+$positions = buscaBinaria($array, "assassin", 'title');
+
+foreach($positions as $position){
+    $resultados[] = $array[$position];
+}
+
+echo "<pre>";
+print_r($resultados);
+echo "<pre>";
 
 ?>

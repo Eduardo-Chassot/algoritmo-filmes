@@ -1,25 +1,49 @@
-body {
-    font-family: Arial, sans-serif;
+/* Reset de margens e preenchimento para todos os elementos */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos para o corpo da página */
+body {
+    font-family: Arial, sans-serif;
     background-color: #f2f2f2;
 }
 
+/* Estilos para os containers de pesquisa */
 .search-container {
     display: flex;
-    justify-content: center;
     align-items: center;
     height: 15%;
+    margin-top: 20px;
 }
 
-#search-bar {
+/* Estilos para o elemento input de pesquisa */
+.search-bar {
+    flex: 1; /* Ocupa todo o espaço disponível */
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    width: 300px;
+    transition: border-color 0.3s;
 }
 
+/* Estilos para o elemento select */
+.select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%; /* Ocupa todo o espaço disponível */
+    appearance: none;
+    background-image: url("dropdown-icon.png");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 20px;
+}
+
+/* Estilos para o botão de pesquisa */
 #search-button {
     padding: 10px 20px;
     background-color: #007bff;
@@ -29,8 +53,10 @@ body {
     cursor: pointer;
     font-size: 16px;
     margin-left: 10px;
+    transition: background-color 0.3s;
 }
 
+/* Estilos de hover para o botão de pesquisa */
 #search-button:hover {
     background-color: #0056b3;
 }

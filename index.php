@@ -23,11 +23,22 @@
         </select>
         <button id="search-button">Pesquisar</button>
     </div>
+    <div>
+        <table class="table">
+            <tr>
+                <td>Titulo</td>
+                <td>Receita</td>
+                <td>Subtitulo</td>
+            </tr>
+        </table>
+    </div>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
         $(document).ready(function() {
             let $select = $("#search-select"),
                 $pesquisa = $("#search-bar");
+
+            const padrao = "<tr><td>Titulo</td><td>Receita</td><td>Subtitulo</td></tr>"
 
             $select.on("change", function(){
                 chamarFilmes();
@@ -37,13 +48,21 @@
                 chamarFilmes();
             })
 
-            function chamarFilmes(){
-                if($select.val() && $pesquisa.val()){
-                    $.post("ajax/pesquisa.php", 
-                    {pesquisa : $pesquisa.val(), select: $select.val()}, 
-                    success: function (data) {
-                        console.log(data); 
-                    }, "Json");
+            function chamarFilmes() {
+                if ($select.val() && $pesquisa.val()) {
+                    $.post("ajax/pesquisa.php",
+                        { pesquisa: $pesquisa.val(), select: $select.val() },
+                        function(data) { // Colocar a função diretamente aqui
+                            let inserir = padrao;
+
+                            data.forEach(function(item) { // Usar forEach para iterar sobre os elementos
+                                inserir += `<tr><td>${item.title}</td><td>${item.revenue}</td><td>${item.overview}</td></tr>`;
+                            });
+
+                            $(".table").html(inserir);
+                        },
+                        "json" // Tipo de dados esperado
+                    );
                 }
             }
         })

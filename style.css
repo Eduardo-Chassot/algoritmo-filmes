@@ -43,6 +43,10 @@ body {
     background-size: 20px;
 }
 
+.table{
+    padding: 10px;
+}
+
 /* Estilos para o botão de pesquisa */
 #search-button {
     padding: 10px 20px;
